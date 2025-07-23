@@ -1,0 +1,320 @@
+
+11:34:52 AM [vite] (client) Re-optimizing dependencies because lockfile has changed
+Port 5173 is in use, trying another one...
+
+  VITE v7.0.5  ready in 760 ms
+
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+(!) Failed to run dependency scan. Skipping dependency pre-bundling. Error:   Failed to scan for dependencies from entries:
+  /Users/xiongjian/react_flow/reactflow-campaign-demo/index.html
+
+  ✘ [ERROR] Missing "./megaphone-ltr-24-regular" specifier in "@fluentui/react-icons" package [plugin vite:dep-scan]
+
+    src/components/ActivityDetailNode.jsx:2:38:
+      2 │ ...r24Regular } from '@fluentui/react-icons/megaphone-ltr-24-regular';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/esbuild/lib/main.js:1141:20:
+      1141 │       let promise = setup({
+           ╵                     ^
+
+    at setup (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10917:12)
+    at handlePlugins (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:680:5)
+    at /Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:1074
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10742:23)
+
+
+✘ [ERROR] Missing "./mail-24-regular" specifier in "@fluentui/react-icons" package [plugin vite:dep-scan]
+
+    src/components/EmailTemplateNode.jsx:2:30:
+      2 │ import { Mail24Regular } from '@fluentui/react-icons/mail-24-regular';
+        ╵                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/esbuild/lib/main.js:1141:20:
+      1141 │       let promise = setup({
+           ╵                     ^
+
+    at setup (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10917:12)
+    at handlePlugins (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:680:5)
+    at /Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:1074
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10742:23)
+
+
+✘ [ERROR] Missing "./people-community-24-regular" specifier in "@fluentui/react-icons" package [plugin vite:dep-scan]
+
+    src/components/SegmentNode.jsx:2:41:
+      2 │ ...Regular } from '@fluentui/react-icons/people-community-24-regular';
+        ╵                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/esbuild/lib/main.js:1141:20:
+      1141 │       let promise = setup({
+           ╵                     ^
+
+    at setup (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10917:12)
+    at handlePlugins (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:680:5)
+    at /Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:1074
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10742:23)
+
+
+✘ [ERROR] Missing "./chess-24-regular" specifier in "@fluentui/react-icons" package [plugin vite:dep-scan]
+
+    src/components/StrategyNode.jsx:2:31:
+      2 │ ...t { Chess24Regular } from '@fluentui/react-icons/chess-24-regular';
+        ╵                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/esbuild/lib/main.js:1141:20:
+      1141 │       let promise = setup({
+           ╵                     ^
+
+    at setup (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10917:12)
+    at handlePlugins (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:680:5)
+    at /Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:1074
+    at prepareEsbuildScanner (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:10742:23)
+
+
+    at failureErrorWithLog (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1467:15)
+    at /Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:926:25
+    at runOnEndCallbacks (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:1307:45)
+    at buildResponseToResult (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:924:7)
+    at /Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:936:9
+    at new Promise (<anonymous>)
+    at requestCallbacks.on-end (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:935:54)
+    at handleRequest (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/esbuild/lib/main.js:581:7)
+11:34:55 AM [vite] (client) Pre-transform error: Missing "./people-community-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/SegmentNode.jsx:2:41
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { PeopleCommunity24Regular } from "@fluentui/react-icons/people-community-24-regular";
+     |                                            ^
+  19 |  import * as React from "react";
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ffe0b2", background: "#fff8e1" }, children: 
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ffe0b2", background: "#fff8e1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, backgroun
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ffe0b2", background: "#fff8e1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(PeopleCommunity24Regular, { color: "#ff9800", fontSize: 36 }, void 0, false, {
+11:34:55 AM [vite] (client) Pre-transform error: Missing "./chess-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/StrategyNode.jsx:2:31
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { Chess24Regular } from "@fluentui/react-icons/chess-24-regular";
+     |                                  ^
+  19 |  import * as React from "react";
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2p
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #b2dfdb", background: "#e0f2f1" }, children:
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #b2dfdb", background: "#e0f2f1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, backgrou
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #b2dfdb", background: "#e0f2f1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(Chess24Regular, { color: "#00897b", fontSize: 36 }, void 0, false, {
+11:34:55 AM [vite] Internal server error: Missing "./megaphone-ltr-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/ActivityDetailNode.jsx:2:38
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { MegaphoneLtr24Regular } from "@fluentui/react-icons/megaphone-ltr-24-regular";
+     |                                         ^
+  19 |  import * as React from "react";
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow:
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #c7e0f4", background: "#f3f9fd" }, chi
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #c7e0f4", background: "#f3f9fd" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, ba
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #c7e0f4", background: "#f3f9fd" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(MegaphoneLtr24Regular, { color: "#0078d4", fontSize: 36 }, void 0, false, {
+      at e (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9074:8)
+      at n (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9086:14)
+      at o (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9114:10)
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12187:17)
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:22)
+      at tryNodeResolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12073:17)
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:11912:15)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31218:19)
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31400:13)
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002:22)
+      at async file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30068:32
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/d
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30036:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31284:14)
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:2
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:26454:26)
+11:34:55 AM [vite] (client) Pre-transform error: Missing "./megaphone-ltr-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/ActivityDetailNode.jsx:2:38
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { MegaphoneLtr24Regular } from "@fluentui/react-icons/megaphone-ltr-24-regular";
+     |                                         ^
+  19 |  import * as React from "react";
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow:
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #c7e0f4", background: "#f3f9fd" }, chi
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #c7e0f4", background: "#f3f9fd" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, ba
+  20 |  const ActivityDetailNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #c7e0f4", background: "#f3f9fd" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(MegaphoneLtr24Regular, { color: "#0078d4", fontSize: 36 }, void 0, false, {
+11:34:55 AM [vite] Internal server error: Missing "./mail-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/EmailTemplateNode.jsx:2:30
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { Mail24Regular } from "@fluentui/react-icons/mail-24-regular";
+     |                                 ^
+  19 |  import * as React from "react";
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: 
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e1bee7", background: "#f3e5f5" }, chil
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e1bee7", background: "#f3e5f5" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, bac
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e1bee7", background: "#f3e5f5" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(Mail24Regular, { color: "#8e24aa", fontSize: 36 }, void 0, false, {
+      at e (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9074:8)
+      at n (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9086:14)
+      at o (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9114:10)
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12187:17)
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:22)
+      at tryNodeResolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12073:17)
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:11912:15)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31218:19)
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31400:13)
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002:22)
+      at async file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30068:32
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/d
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30036:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31284:14)
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:2
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:26454:26)
+11:34:55 AM [vite] (client) Pre-transform error: Missing "./mail-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/EmailTemplateNode.jsx:2:30
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { Mail24Regular } from "@fluentui/react-icons/mail-24-regular";
+     |                                 ^
+  19 |  import * as React from "react";
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: 
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e1bee7", background: "#f3e5f5" }, chil
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e1bee7", background: "#f3e5f5" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, bac
+  20 |  const EmailTemplateNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e1bee7", background: "#f3e5f5" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(Mail24Regular, { color: "#8e24aa", fontSize: 36 }, void 0, false, {
+11:34:55 AM [vite] Internal server error: Missing "./people-community-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/SegmentNode.jsx:2:41
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { PeopleCommunity24Regular } from "@fluentui/react-icons/people-community-24-regular";
+     |                                            ^
+  19 |  import * as React from "react";
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ffe0b2", background: "#fff8e1" }, children: 
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ffe0b2", background: "#fff8e1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, backgroun
+  20 |  const SegmentNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #ffe0b2", background: "#fff8e1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(PeopleCommunity24Regular, { color: "#ff9800", fontSize: 36 }, void 0, false, {
+      at e (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9074:8)
+      at n (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9086:14)
+      at o (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9114:10)
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12187:17)
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:22)
+      at tryNodeResolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12073:17)
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:11912:15)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31218:19)
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31400:13)
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002:22)
+      at async file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30068:32
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/d
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30036:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31284:14)
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:2
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:26454:26)
+      at async viteTransformMiddleware (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVn
+      at async viteTransformMiddleware (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:27539:20)
+11:34:55 AM [vite] Internal server error: Missing "./chess-24-regular" specifier in "@fluentui/react-icons" package
+  Plugin: vite:import-analysis
+  File: /Users/xiongjian/react_flow/reactflow-campaign-demo/src/components/StrategyNode.jsx:2:31
+  16 |  }
+  17 |  import { Card, CardPreview } from "@fluentui/react-components";
+  18 |  import { Chess24Regular } from "@fluentui/react-icons/chess-24-regular";
+     |                                  ^
+  19 |  import * as React from "react";
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2p
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #b2dfdb", background: "#e0f2f1" }, children:
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #b2dfdb", background: "#e0f2f1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, backgrou
+  20 |  const StrategyNode = () => /* @__PURE__ */ jsxDEV(Card, { style: { width: 64, height: 64, padding: 0, borderRadius: 12, boxShadow: "0 2px 8px #e5e5e5", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #b2dfdb", background: "#e0f2f1" }, children: /* @__PURE__ */ jsxDEV(CardPreview, { style: { display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "none" }, children: /* @__PURE__ */ jsxDEV(Chess24Regular, { color: "#00897b", fontSize: 36 }, void 0, false, {
+      at e (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9074:8)
+      at n (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9086:14)
+      at o (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:9114:10)
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:
+      at resolveExportsOrImports (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12187:17)
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:
+      at resolveDeepImport (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12201:22)
+      at tryNodeResolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:12073:17)
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.
+      at ResolveIdContext.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:11912:15)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.resolveId (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31218:19)
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep
+      at async TransformPluginContext.resolve (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31400:13)
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002
+      at async normalizeUrl (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30002:22)
+      at async file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30068:32
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/d
+      at async TransformPluginContext.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:30036:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chun
+      at async EnvironmentPluginContainer.transform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:31284:14)
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:2
+      at async loadAndTransform (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:26454:26)
+      at async viteTransformMiddleware (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVn
+      at async viteTransformMiddleware (file:///Users/xiongjian/react_flow/reactflow-campaign-demo/node_modules/vite/dist/node/chunks/dep-Bg4HVnP5.js:27539:20)
+11:34:55 AM [vite] (client) ✨ new dependencies optimized: react-dom/client, reactflow, @fluentui/react-components
+11:34:55 AM [vite] (client) ✨ optimized dependencies changed. reloading
