@@ -10,6 +10,8 @@ import SegmentPanel from './components/SegmentPanel';
 import StrategyPanel from './components/StrategyPanel';
 import EmailTemplatePanel from './components/EmailTemplatePanel';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'antd/dist/reset.css'; // Ant Design v5 推荐
+import 'antd/dist/antd.css'; // Ant Design v4
 
 const nodeTypes = {
   activityDetail: ActivityDetailNode,
