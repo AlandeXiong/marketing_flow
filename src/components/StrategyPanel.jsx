@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Button } from '@fluentui/react-components';
-import { Slider, Select } from 'antd';
+import React from 'react';
+import { Form, Select, Slider, Button } from 'antd';
 import 'antd/dist/reset.css';
 
 const channelsOptions = [
@@ -31,15 +30,10 @@ const budgetMarks = {
 };
 
 const StrategyPanel = () => {
-  const [channels, setChannels] = useState(['email', 'sms']);
-  const [frequency, setFrequency] = useState(1);
-  const [budget, setBudget] = useState(50);
-  const [loading, setLoading] = useState(false);
-
+  const [form] = Form.useForm();
   const handleSave = async () => {
-    setLoading(true);
+    const values = await form.validateFields();
     // TODO: Replace with actual API call
-    setTimeout(() => setLoading(false), 1000);
   };
 
   return (
@@ -47,77 +41,15 @@ const StrategyPanel = () => {
       <div style={{ fontSize: 20, fontWeight: 700, color: '#00897b', marginBottom: 24, borderBottom: '1px solid #b2dfdb', paddingBottom: 8 }}>
         Delivery Strategy
       </div>
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Channels</label>
-        <Select
-          mode="multiple"
-          allowClear
-          value={channels}
-          onChange={setChannels}
-          options={channelsOptions}
-          style={{ width: '100%', borderRadius: 6, borderColor: '#b6d4fa', background: '#fff' }}
-          placeholder="Select channels"
-        />
-      </div>
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Frequency (per week)</label>
-        <Slider
-          marks={frequencyMarks}
-          step={null}
-          included={false}
-          min={1}
-          max={7}
-          value={frequency}
-          onChange={setFrequency}
-          style={{ width: '100%', margin: '0 8px' }}
-        />
-      </div>
-      <div style={{ marginBottom: 28 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Budget Allocation (% to Email)</label>
-        <Slider
-          marks={budgetMarks}
-          step={null}
-          included={false}
-          min={0}
-          max={100}
-          value={budget}
-          onChange={setBudget}
-          style={{ width: '100%', margin: '0 8px' }}
-        />
-      </div>
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end' }}>
-        <Button
-          style={{
-            background: '#e0e6ed',
-            color: '#333',
-            border: '1px solid #b0b8c1',
-            minWidth: 90,
-            fontWeight: 600,
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseOver={e => (e.currentTarget.style.background = '#cfd8dc')}
-          onMouseOut={e => (e.currentTarget.style.background = '#e0e6ed')}
-        >
-          Cancel
-        </Button>
-        <Button
-          appearance="primary"
-          style={{
-            background: '#00897b',
-            color: '#fff',
-            minWidth: 90,
-            fontWeight: 600,
-            border: '1px solid #00897b',
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseOver={e => (e.currentTarget.style.background = '#005f56')}
-          onMouseOut={e => (e.currentTarget.style.background = '#00897b')}
-          onClick={handleSave}
-          loading={loading}
-        >
-          Save
-        </Button>
-      </div>
+      <Form form={form} layout="vertical">
+        <Form.Item label="Channels" name="channels" initialValue={['email', 'sms']} rules={[{ required: true }]}> <Select mode="multiple" allowClear options={channelsOptions} placeholder="Select channels" /> </Form.Item>
+        <Form.Item label="Frequency (per week)" name="frequency" initialValue={1} rules={[{ required: true }]}> <Slider marks={frequencyMarks} step={null} included={false} min={1} max={7} style={{ width: '100%', margin: '0 8px' }} /> </Form.Item>
+        <Form.Item label="Budget Allocation (% to Email)" name="budget" initialValue={50} rules={[{ required: true }]}> <Slider marks={budgetMarks} step={null} included={false} min={0} max={100} style={{ width: '100%', margin: '0 8px' }} /> </Form.Item>
+        <Form.Item style={{ textAlign: 'right' }}>
+          <Button style={{ marginRight: 12 }} onClick={() => form.resetFields()}>Cancel</Button>
+          <Button type="primary" onClick={handleSave}>Save</Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };

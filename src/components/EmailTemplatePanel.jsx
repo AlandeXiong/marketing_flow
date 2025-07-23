@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
-import { Input, Textarea, Button } from '@fluentui/react-components';
+import React from 'react';
+import { Form, Input, Button } from 'antd';
+import 'antd/dist/reset.css';
 
 const EmailTemplatePanel = () => {
-  const [subject, setSubject] = useState("Secure Your Family's Future with Our New Insurance Plans");
-  const [body, setBody] = useState("Discover our latest life insurance products designed for your family's protection and financial growth. Contact us for a personalized plan!");
-  const [cta, setCta] = useState('Learn More');
-  const [loading, setLoading] = useState(false);
-
+  const [form] = Form.useForm();
   const handleSave = async () => {
-    setLoading(true);
+    const values = await form.validateFields();
     // TODO: Replace with actual API call
-    setTimeout(() => setLoading(false), 1000);
   };
 
   return (
@@ -18,51 +14,15 @@ const EmailTemplatePanel = () => {
       <div style={{ fontSize: 20, fontWeight: 700, color: '#8e24aa', marginBottom: 24, borderBottom: '1px solid #e1bee7', paddingBottom: 8 }}>
         Email Template
       </div>
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Subject</label>
-        <Input value={subject} onChange={e => setSubject(e.target.value)} style={{ width: '100%', borderRadius: 6, borderColor: '#b6d4fa', background: '#fff' }} />
-      </div>
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Body</label>
-        <Textarea value={body} onChange={e => setBody(e.target.value)} style={{ width: '100%', borderRadius: 6, borderColor: '#b6d4fa', background: '#fff' }} rows={3} />
-      </div>
-      <div style={{ marginBottom: 28 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>CTA</label>
-        <Input value={cta} onChange={e => setCta(e.target.value)} style={{ width: '100%', borderRadius: 6, borderColor: '#b6d4fa', background: '#fff' }} />
-      </div>
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end' }}>
-        <Button
-          style={{
-            background: '#e0e6ed',
-            color: '#333',
-            border: '1px solid #b0b8c1',
-            minWidth: 90,
-            fontWeight: 600,
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseOver={e => (e.currentTarget.style.background = '#cfd8dc')}
-          onMouseOut={e => (e.currentTarget.style.background = '#e0e6ed')}
-        >
-          Cancel
-        </Button>
-        <Button
-          appearance="primary"
-          style={{
-            background: '#8e24aa',
-            color: '#fff',
-            minWidth: 90,
-            fontWeight: 600,
-            border: '1px solid #8e24aa',
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseOver={e => (e.currentTarget.style.background = '#5e1674')}
-          onMouseOut={e => (e.currentTarget.style.background = '#8e24aa')}
-          onClick={handleSave}
-          loading={loading}
-        >
-          Save
-        </Button>
-      </div>
+      <Form form={form} layout="vertical">
+        <Form.Item label="Subject" name="subject" initialValue="Secure Your Family's Future with Our New Insurance Plans" rules={[{ required: true }]}> <Input /> </Form.Item>
+        <Form.Item label="Body" name="body" initialValue="Discover our latest life insurance products designed for your family's protection and financial growth. Contact us for a personalized plan!"> <Input.TextArea rows={3} /> </Form.Item>
+        <Form.Item label="CTA" name="cta" initialValue="Learn More"> <Input /> </Form.Item>
+        <Form.Item style={{ textAlign: 'right' }}>
+          <Button style={{ marginRight: 12 }} onClick={() => form.resetFields()}>Cancel</Button>
+          <Button type="primary" onClick={handleSave}>Save</Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };
