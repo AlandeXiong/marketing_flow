@@ -1,28 +1,12 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Input, Textarea, Button } from '@fluentui/react-components';
+import React from 'react';
+import { Form, Input, DatePicker, Button } from 'antd';
+import 'antd/dist/reset.css';
 
 const ActivityDetailPanel = () => {
-  const [name, setName] = useState('Summer Insurance Promotion');
-  const [period, setPeriod] = useState(new Date());
-  const [budget, setBudget] = useState('200000');
-  const [desc, setDesc] = useState('Multi-channel campaign to promote new life insurance products and increase customer acquisition.');
-  const [loading, setLoading] = useState(false);
-
+  const [form] = Form.useForm();
   const handleSave = async () => {
-    setLoading(true);
-    await fetch('/api/campaign/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        period,
-        budget,
-        desc,
-      }),
-    });
-    setLoading(false);
+    const values = await form.validateFields();
+    // TODO: Replace with actual API call
   };
 
   return (
@@ -30,55 +14,16 @@ const ActivityDetailPanel = () => {
       <div style={{ fontSize: 20, fontWeight: 700, color: '#0078d4', marginBottom: 24, borderBottom: '1px solid #e0e6ed', paddingBottom: 8 }}>
         Campaign Details
       </div>
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Campaign Name</label>
-        <Input value={name} onChange={e => setName(e.target.value)} style={{ width: '100%', borderRadius: 6, borderColor: '#b6d4fa', background: '#fff' }} />
-      </div>
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Period</label>
-        <DatePicker selected={period} onChange={setPeriod} dateFormat="yyyy-MM-dd" className="react-datepicker__input" style={{ width: '100%' }} />
-      </div>
-      <div style={{ marginBottom: 20 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Budget</label>
-        <Input value={budget} onChange={e => setBudget(e.target.value)} style={{ width: '100%', borderRadius: 6, borderColor: '#b6d4fa', background: '#fff' }} />
-      </div>
-      <div style={{ marginBottom: 28 }}>
-        <label style={{ display: 'block', fontWeight: 600, color: '#333', marginBottom: 6 }}>Description</label>
-        <Textarea value={desc} onChange={e => setDesc(e.target.value)} style={{ width: '100%', borderRadius: 6, borderColor: '#b6d4fa', background: '#fff' }} rows={3} />
-      </div>
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end' }}>
-        <Button
-          style={{
-            background: '#e0e6ed',
-            color: '#333',
-            border: '1px solid #b0b8c1',
-            minWidth: 90,
-            fontWeight: 600,
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseOver={e => (e.currentTarget.style.background = '#cfd8dc')}
-          onMouseOut={e => (e.currentTarget.style.background = '#e0e6ed')}
-        >
-          Cancel
-        </Button>
-        <Button
-          appearance="primary"
-          style={{
-            background: '#0078d4',
-            color: '#fff',
-            minWidth: 90,
-            fontWeight: 600,
-            border: '1px solid #0078d4',
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseOver={e => (e.currentTarget.style.background = '#005fa3')}
-          onMouseOut={e => (e.currentTarget.style.background = '#0078d4')}
-          onClick={handleSave}
-          loading={loading}
-        >
-          Save
-        </Button>
-      </div>
+      <Form form={form} layout="vertical">
+        <Form.Item label="Campaign Name" name="name" initialValue="Summer Insurance Promotion" rules={[{ required: true }]}> <Input /> </Form.Item>
+        <Form.Item label="Period" name="period" initialValue={null} rules={[{ required: true }]}> <DatePicker style={{ width: '100%' }} /> </Form.Item>
+        <Form.Item label="Budget" name="budget" initialValue="200000" rules={[{ required: true }]}> <Input /> </Form.Item>
+        <Form.Item label="Description" name="desc" initialValue="Multi-channel campaign to promote new life insurance products and increase customer acquisition."> <Input.TextArea rows={3} /> </Form.Item>
+        <Form.Item style={{ textAlign: 'right' }}>
+          <Button style={{ marginRight: 12 }} onClick={() => form.resetFields()}>Cancel</Button>
+          <Button type="primary" onClick={handleSave}>Save</Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };
