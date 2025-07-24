@@ -11,6 +11,7 @@ import StrategyPanel from './components/StrategyPanel';
 import EmailTemplatePanel from './components/EmailTemplatePanel';
 import { Modal, Select, Button } from 'antd';
 import 'antd/dist/reset.css';
+import ChatWidget from './components/ChatWidget';
 
 const nodeTypes = {
   activityDetail: ActivityDetailNode,
@@ -176,6 +177,7 @@ function App() {
         </Modal>
       </div>
       {selected && <Panel nodeType={selected} node={selectedNode} onClose={handleClosePanel} onSave={handlePanelSave} />}
+      <ChatWidget />
     </div>
   );
 }
