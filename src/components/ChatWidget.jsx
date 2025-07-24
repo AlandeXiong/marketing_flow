@@ -54,8 +54,25 @@ const ChatWidget = () => {
 
   return (
     <>
-      <Button type="primary" shape="circle" size="large" style={{ position: 'fixed', right: 32, bottom: 32, zIndex: 1001, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setOpen(true)}>
-        <span style={{ fontSize: 36, lineHeight: 1 }}>🤖</span>
+        <Button 
+        type="primary" 
+        shape="circle" 
+        size="large" 
+        style={{ 
+          position: 'fixed', 
+          right: 64, 
+          bottom: 48, 
+          zIndex: 1001, 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          backgroundColor: 'white', // White
+          border: '1px solid #e8e8e8', // box
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' // shade
+        }} 
+        onClick={() => setOpen(true)}
+      >
+        <img src="/robot.png" alt="campaign" style={{ width: 32, height: 32, display: 'block' }} />
       </Button>
       <Drawer
         title="Smart Marketing Assistant"

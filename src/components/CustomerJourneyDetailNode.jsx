@@ -11,11 +11,7 @@ const ActivityDetailNode = () => (
     <Handle type="target" position={Position.Left} style={{ background: '#0078d4' }} />
     <Card variant="outlined" styles={{ body: { padding: 0, textAlign: 'center' } }} style={{ width: 120, height: 80, borderRadius: 8, boxShadow: '0 2px 8px #b3c6e0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '2px solid #1976d2', background: '#f3f9fd' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, margin: '4px auto' }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="12" fill="#90caf9"/>
-          <rect x="7" y="10.5" width="10" height="3" rx="1.5" fill="#1565c0"/>
-          <rect x="11" y="6" width="2" height="12" rx="1" fill="#1565c0"/>
-        </svg>
+        <img src="/campaign.png" alt="campaign" style={{ width: 32, height: 32, display: 'block' }} />
       </div>
       <Title level={5} style={{ color: '#1565c0', fontWeight: 700, margin: 0, fontSize: 14, lineHeight: '1.2' }}>Campaign</Title>
     </Card>
