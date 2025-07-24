@@ -85,6 +85,7 @@ function App() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [newNodeType, setNewNodeType] = useState();
+  const [addParentId, setAddParentId] = useState(null); // 新增
 
   const onNodeClick = useCallback((event, node) => {
     setSelected(node.type);
@@ -101,9 +102,10 @@ function App() {
   };
 
   // 添加节点逻辑
-  const handleAddNode = () => {
+  const handleAddNode = (parentId = null) => {
     setAddModalOpen(true);
     setNewNodeType(undefined);
+    setAddParentId(parentId); // 记录父节点id
   };
   // 自动布局函数
   const layoutAndSetNodes = (newNodes, newEdges) => {
@@ -111,25 +113,46 @@ function App() {
     // The nodes will be positioned manually or by user interaction.
     setNodes(newNodes);
   };
+  const getNonOverlappingPosition = (parentNode, nodes) => {
+    // Default offset
+    let x = parentNode ? parentNode.position.x + 120 : 0;
+    let y = parentNode ? parentNode.position.y : 0;
+    // Avoid overlap: if any node is at (x, y), shift down
+    const nodeHeight = 70;
+    while (nodes.some(n => Math.abs(n.position.x - x) < 10 && Math.abs(n.position.y - y) < nodeHeight)) {
+      y += nodeHeight;
+    }
+    return { x, y };
+  };
   const handleAddNodeOk = () => {
     if (!newNodeType) return;
     const newId = (nodes.length + 1).toString();
+    let parentNode = null;
+    if (addParentId) {
+      parentNode = nodes.find(n => n.id === addParentId);
+    } else if (nodes.length > 0) {
+      parentNode = nodes[nodes.length - 1];
+    }
+    const position = getNonOverlappingPosition(parentNode, nodes);
     const newNode = {
       id: newId,
       type: newNodeType,
-      position: { x: 0, y: 0 },
+      position,
       data: {},
       label: nodeTypeOptions.find(opt => opt.value === newNodeType)?.label || '',
     };
     let newNodes = [...nodes, newNode];
     let newEdges = edges;
-    if (nodes.length > 0) {
+    if (addParentId) {
+      newEdges = [...edges, { id: `e${addParentId}-${newId}`, source: addParentId, target: newId, animated: true, style: { strokeWidth: 3 } }];
+    } else if (nodes.length > 0) {
       const lastNode = nodes[nodes.length - 1];
       newEdges = [...edges, { id: `e${lastNode.id}-${newId}`, source: lastNode.id, target: newId, animated: true, style: { strokeWidth: 3 } }];
     }
     layoutAndSetNodes(newNodes, newEdges);
     setEdges(newEdges);
     setAddModalOpen(false);
+    setAddParentId(null);
   };
 
   // 拖拽后自动布局
@@ -143,10 +166,10 @@ function App() {
       <div style={{ flex: 1, minWidth: 0, maxWidth: 1400, margin: '0 auto', height: '90vh', width: '100%', background: '#fff' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '20px 0 0 0' }}>
           <h2 style={{ textAlign: 'center', margin: 0 }}>Insurance Campaign Flow</h2>
-          <Button type="primary" onClick={handleAddNode}>Add Node</Button>
+          <Button type="primary" onClick={() => handleAddNode(null)}>Add Node</Button>
         </div>
         <ReactFlow
-          nodes={nodes.map(n => ({ ...n, data: { ...n.data, onAddNode: handleAddNode } }))}
+          nodes={nodes.map(n => ({ ...n, data: { ...n.data, onAddNode: () => handleAddNode(n.id) } }))}
           edges={edges}
           nodeTypes={nodeTypes}
           fitView
