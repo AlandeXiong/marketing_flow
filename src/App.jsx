@@ -14,10 +14,10 @@ import 'antd/dist/reset.css';
 import ChatWidget from './components/ChatWidget';
 
 const nodeTypes = {
-  activityDetail: ActivityDetailNode,
-  segment: SegmentNode,
-  strategy: StrategyNode,
-  emailTemplate: EmailTemplateNode,
+  activityDetail: (props) => <ActivityDetailNode {...props} />, // will pass data below
+  segment: (props) => <SegmentNode {...props} />,
+  strategy: (props) => <StrategyNode {...props} />,
+  emailTemplate: (props) => <EmailTemplateNode {...props} />,
 };
 
 const nodeTypeOptions = [
@@ -146,7 +146,7 @@ function App() {
           <Button type="primary" onClick={handleAddNode}>Add Node</Button>
         </div>
         <ReactFlow
-          nodes={nodes}
+          nodes={nodes.map(n => ({ ...n, data: { ...n.data, onAddNode: handleAddNode } }))}
           edges={edges}
           nodeTypes={nodeTypes}
           fitView
