@@ -1,10 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import ReactFlow, { Background, Controls, addEdge, useNodesState, useEdgesState } from 'reactflow';
 import 'reactflow/dist/style.css';
-import ActivityDetailNode from './components/CustomerJourneyDetailNode';
-import SegmentNode from './components/SegmentNode';
-import StrategyNode from './components/StrategyNode';
-import EmailTemplateNode from './components/EmailTemplateNode';
 import ActivityDetailPanel from './components/CustomerJourneyDetailPanel';
 import SegmentPanel from './components/SegmentPanel';
 import StrategyPanel from './components/StrategyPanel';
@@ -12,22 +8,22 @@ import EmailTemplatePanel from './components/EmailTemplatePanel';
 import { Modal, Select, Button } from 'antd';
 import 'antd/dist/reset.css';
 import ChatWidget from './components/ChatWidget';
+import { NODE_TYPE_OPTIONS, NODE_TYPES } from './types/nodeTypes';
+import { connectionManager } from './utils/connectionLogic';
+import { backendService } from './services/backendService';
+import { NodeFactory } from './factories/nodeFactory.jsx';
 
-const nodeTypes = {
-  activityDetail: (props) => <ActivityDetailNode {...props} />, // will pass data below
-  segment: (props) => <SegmentNode {...props} />,
-  strategy: (props) => <StrategyNode {...props} />,
-  emailTemplate: (props) => <EmailTemplateNode {...props} />,
-};
-
-const nodeTypeOptions = [
-  { value: 'activityDetail', label: 'Campaign' },
-  { value: 'segment', label: 'Segment' },
-  { value: 'strategy', label: 'Strategy' },
-  { value: 'emailTemplate', label: 'Email' },
-];
+// Create node types using factory
+const nodeTypes = NodeFactory.createAllNodeComponents();
 
 const initialNodes = [
+  {
+    id: '0',
+    type: 'start',
+    position: { x: -180, y: 200 },
+    data: {},
+    label: 'Start',
+  },
   {
     id: '1',
     type: 'activityDetail',
@@ -59,6 +55,7 @@ const initialNodes = [
 ];
 
 const initialEdges = [
+  { id: 'e0-1', source: '0', target: '1', animated: true, style: { strokeWidth: 3 } },
   { id: 'e1-2', source: '1', target: '2', animated: true, style: { strokeWidth: 3 } },
   { id: 'e2-3', source: '2', target: '3', animated: true, style: { strokeWidth: 3 } },
   { id: 'e3-4', source: '3', target: '4', animated: true, style: { strokeWidth: 3 } },
@@ -66,6 +63,7 @@ const initialEdges = [
 
 function Panel({ nodeType, node, onClose, onSave }) {
   let Content = null;
+  if (nodeType === 'start') Content = (props) => <div style={{ padding: '20px' }}><h3>Start Node</h3><p>This is the starting point of the campaign flow.</p></div>;
   if (nodeType === 'activityDetail') Content = (props) => <ActivityDetailPanel {...props} node={node} onSave={onSave} />;
   if (nodeType === 'segment') Content = (props) => <SegmentPanel {...props} node={node} onSave={onSave} />;
   if (nodeType === 'strategy') Content = (props) => <StrategyPanel {...props} node={node} onSave={onSave} />;
@@ -85,7 +83,33 @@ function App() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [newNodeType, setNewNodeType] = useState();
-  const [addParentId, setAddParentId] = useState(null); // 新增
+  const [addParentId, setAddParentId] = useState(null);
+
+  // Initialize backend service
+  useEffect(() => {
+    backendService.connect();
+    
+    // Register message handlers
+    backendService.registerHandler('campaign', (message) => {
+      console.log('Campaign data received:', message);
+    });
+    
+    backendService.registerHandler('segment', (message) => {
+      console.log('Segment data received:', message);
+    });
+    
+    backendService.registerHandler('strategy', (message) => {
+      console.log('Strategy data received:', message);
+    });
+    
+    backendService.registerHandler('emailTemplate', (message) => {
+      console.log('Email template data received:', message);
+    });
+
+    return () => {
+      backendService.disconnect();
+    };
+  }, []);
 
   const onNodeClick = useCallback((event, node) => {
     setSelected(node.type);
@@ -113,16 +137,8 @@ function App() {
     // The nodes will be positioned manually or by user interaction.
     setNodes(newNodes);
   };
-  const getNonOverlappingPosition = (parentNode, nodes) => {
-    // Default offset
-    let x = parentNode ? parentNode.position.x + 120 : 0;
-    let y = parentNode ? parentNode.position.y : 0;
-    // Avoid overlap: if any node is at (x, y), shift down
-    const nodeHeight = 70;
-    while (nodes.some(n => Math.abs(n.position.x - x) < 10 && Math.abs(n.position.y - y) < nodeHeight)) {
-      y += nodeHeight;
-    }
-    return { x, y };
+  const getNonOverlappingPosition = (parentNode, nodes, nodeType) => {
+    return connectionManager.calculateNodePosition(parentNode, nodes, nodeType);
   };
   const handleAddNodeOk = () => {
     if (!newNodeType) return;
@@ -133,21 +149,21 @@ function App() {
     } else if (nodes.length > 0) {
       parentNode = nodes[nodes.length - 1];
     }
-    const position = getNonOverlappingPosition(parentNode, nodes);
+    const position = getNonOverlappingPosition(parentNode, nodes, newNodeType);
     const newNode = {
       id: newId,
       type: newNodeType,
       position,
       data: {},
-      label: nodeTypeOptions.find(opt => opt.value === newNodeType)?.label || '',
+      label: NODE_TYPE_OPTIONS.find(opt => opt.value === newNodeType)?.label || '',
     };
     let newNodes = [...nodes, newNode];
     let newEdges = edges;
     if (addParentId) {
-      newEdges = [...edges, { id: `e${addParentId}-${newId}`, source: addParentId, target: newId, animated: true, style: { strokeWidth: 3 } }];
+      newEdges = [...edges, connectionManager.createEdge(addParentId, newId)];
     } else if (nodes.length > 0) {
       const lastNode = nodes[nodes.length - 1];
-      newEdges = [...edges, { id: `e${lastNode.id}-${newId}`, source: lastNode.id, target: newId, animated: true, style: { strokeWidth: 3 } }];
+      newEdges = [...edges, connectionManager.createEdge(lastNode.id, newId)];
     }
     layoutAndSetNodes(newNodes, newEdges);
     setEdges(newEdges);
@@ -192,7 +208,7 @@ function App() {
             <Select
               style={{ width: '100%' }}
               placeholder="Select node type"
-              options={nodeTypeOptions}
+              options={NODE_TYPE_OPTIONS}
               value={newNodeType}
               onChange={setNewNodeType}
             />
