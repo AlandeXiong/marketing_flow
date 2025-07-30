@@ -120,8 +120,8 @@ export class NodeStyleManager {
     return {
       position: 'absolute',
       right: config.shape === 'circle' ? -8 : config.shape === 'diamond' ? -7 : -7,
-      top: '50%',
-      transform: 'translateY(-50%)',
+      top: config.shape === 'diamond' ? '50%' : '50%',
+      transform: config.shape === 'diamond' ? 'translateY(-50%) rotate(-45deg)' : 'translateY(-50%)',
       width: size,
       height: size,
       fontSize,

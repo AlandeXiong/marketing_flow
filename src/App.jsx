@@ -5,6 +5,7 @@ import ActivityDetailPanel from './components/CustomerJourneyDetailPanel';
 import SegmentPanel from './components/SegmentPanel';
 import StrategyPanel from './components/StrategyPanel';
 import EmailTemplatePanel from './components/EmailTemplatePanel';
+import ConditionPanel from './components/ConditionPanel';
 import { Modal, Select, Button } from 'antd';
 import 'antd/dist/reset.css';
 import ChatWidget from './components/ChatWidget';
@@ -68,6 +69,7 @@ function Panel({ nodeType, node, onClose, onSave }) {
   if (nodeType === 'segment') Content = (props) => <SegmentPanel {...props} node={node} onSave={onSave} />;
   if (nodeType === 'strategy') Content = (props) => <StrategyPanel {...props} node={node} onSave={onSave} />;
   if (nodeType === 'emailTemplate') Content = (props) => <EmailTemplatePanel {...props} node={node} onSave={onSave} />;
+  if (nodeType === 'condition') Content = (props) => <ConditionPanel {...props} node={node} onSave={onSave} />;
   return (
     <div style={{ width: 480, height: '100%', background: '#fff', boxShadow: '-2px 0 8px #eee', padding: 24, position: 'fixed', right: 0, top: 0, zIndex: 10 }}>
       <button style={{ float: 'right', marginBottom: 16 }} onClick={onClose}>Close</button>
@@ -125,13 +127,13 @@ function App() {
     setSelectedNode(null);
   };
 
-  // 添加节点逻辑
+  // Add the Add Node button functionality
   const handleAddNode = (parentId = null) => {
     setAddModalOpen(true);
     setNewNodeType(undefined);
-    setAddParentId(parentId); // 记录父节点id
+    setAddParentId(parentId); // Rrecord the parent ID for the new node
   };
-  // 自动布局函数
+  // Automatically layout nodes after adding a new node
   const layoutAndSetNodes = (newNodes, newEdges) => {
     // This function is no longer needed as dagre is removed.
     // The nodes will be positioned manually or by user interaction.
@@ -172,7 +174,7 @@ function App() {
     setAddParentId(null);
   };
 
-  // 拖拽后自动布局
+  // Drag Auto Layout
   const onNodesChangeWithLayout = (changes) => {
     onNodesChange(changes);
     layoutAndSetNodes(nodes, edges);
