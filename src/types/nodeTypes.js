@@ -61,7 +61,7 @@ export const NODE_TYPE_CONFIG = {
     hasTarget: true,
     hasSource: true,
     shape: 'diamond',
-    size: { width: 60, height: 60 }
+    size: { width: 55, height: 55 }
   }
 };
 
