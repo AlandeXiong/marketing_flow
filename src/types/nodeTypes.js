@@ -4,18 +4,19 @@ export const NODE_TYPES = {
   CAMPAIGN: 'activityDetail',
   SEGMENT: 'segment',
   STRATEGY: 'strategy',
-  EMAIL: 'emailTemplate'
+  EMAIL: 'emailTemplate',
+  CONDITION: 'condition'
 };
 
 export const NODE_TYPE_CONFIG = {
   [NODE_TYPES.START]: {
     label: 'Start',
     color: '#4caf50',
-    icon: '⭕️',
+    icon: '/start.png',
     hasTarget: false,
     hasSource: true,
     shape: 'circle',
-    size: { width: 80, height: 80 }
+    size: { width: 50, height: 50 }
   },
   [NODE_TYPES.CAMPAIGN]: {
     label: 'Campaign',
@@ -52,10 +53,21 @@ export const NODE_TYPE_CONFIG = {
     hasSource: true,
     shape: 'rectangle',
     size: { width: 70, height: 39 }
+  },
+  [NODE_TYPES.CONDITION]: {
+    label: 'Condition',
+    color: '#ff6b35',
+    icon: '/condition.png',
+    hasTarget: true,
+    hasSource: true,
+    shape: 'diamond',
+    size: { width: 50, height: 50 }
   }
 };
 
-export const NODE_TYPE_OPTIONS = Object.entries(NODE_TYPE_CONFIG).map(([value, config]) => ({
-  value,
-  label: config.label
-})); 
+export const NODE_TYPE_OPTIONS = Object.entries(NODE_TYPE_CONFIG)
+  .filter(([value, config]) => value !== NODE_TYPES.START) // Exclude start node from add options
+  .map(([value, config]) => ({
+    value,
+    label: config.label
+  })); 

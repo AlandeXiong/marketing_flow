@@ -15,6 +15,13 @@ export class NodeStyleManager {
         boxShadow: '0 4px 12px',
         border: '3px solid',
         padding: 0
+      },
+      diamond: {
+        borderRadius: 0,
+        boxShadow: '0 2px 8px',
+        border: '2px solid',
+        padding: 0,
+        transform: 'rotate(45deg)'
       }
     };
   }
@@ -36,6 +43,8 @@ export class NodeStyleManager {
       boxShadow: `${baseStyle.boxShadow} ${this.getShadowColor(config.color)}`,
       background: config.shape === 'circle' 
         ? `linear-gradient(135deg, ${this.getLightColor(config.color)} 0%, ${this.getShadowColor(config.color)} 100%)`
+        : config.shape === 'diamond'
+        ? `linear-gradient(135deg, ${this.getLightColor(config.color)} 0%, ${this.getShadowColor(config.color)} 100%)`
         : this.getLightColor(config.color)
     };
   }
@@ -51,7 +60,9 @@ export class NodeStyleManager {
       ...baseStyle,
       borderColor: config.color,
       boxShadow: `${baseStyle.boxShadow} ${this.getShadowColor(config.color)}`,
-      background: this.getLightColor(config.color),
+      background: config.shape === 'diamond' 
+        ? `linear-gradient(135deg, ${this.getLightColor(config.color)} 0%, ${this.getShadowColor(config.color)} 100%)`
+        : this.getLightColor(config.color),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -68,18 +79,20 @@ export class NodeStyleManager {
     
     if (isEmoji) {
       return {
-        fontSize: config.shape === 'circle' ? 24 : 17,
+        fontSize: config.shape === 'circle' ? 24 : config.shape === 'diamond' ? 20 : 17,
         color: config.color,
         marginBottom: config.shape === 'circle' ? 4 : 0,
-        marginTop: config.shape === 'circle' ? 0 : 2
+        marginTop: config.shape === 'circle' ? 0 : 2,
+        transform: config.shape === 'diamond' ? 'rotate(-45deg)' : 'none'
       };
     }
     
     return {
-      width: config.shape === 'circle' ? 24 : 17,
-      height: config.shape === 'circle' ? 24 : 17,
+      width: config.shape === 'circle' ? 24 : config.shape === 'diamond' ? 20 : 17,
+      height: config.shape === 'circle' ? 24 : config.shape === 'diamond' ? 20 : 17,
       display: 'block',
-      marginTop: config.shape === 'circle' ? 0 : 2
+      marginTop: config.shape === 'circle' ? 0 : 2,
+      transform: config.shape === 'diamond' ? 'rotate(-45deg)' : 'none'
     };
   }
 
@@ -90,22 +103,22 @@ export class NodeStyleManager {
       color: config.color,
       fontWeight: 700,
       margin: 0,
-      fontSize: config.shape === 'circle' ? 8 : 7,
+      fontSize: config.shape === 'circle' ? 8 : config.shape === 'diamond' ? 7 : 7,
       lineHeight: '1.2',
-      marginBottom: config.shape === 'circle' ? 0 : 1
+      marginBottom: config.shape === 'circle' ? 0 : 1,
+      transform: config.shape === 'diamond' ? 'rotate(-45deg)' : 'none'
     };
   }
 
   // Get button styles
   getButtonStyle(nodeType) {
     const config = NODE_TYPE_CONFIG[nodeType];
-    const size = config.shape === 'circle' ? 16 : 14;
-    const fontSize = config.shape === 'circle' ? 12 : 10;
-    const right = config.shape === 'circle' ? 8 : 3;
+    const size = config.shape === 'circle' ? 16 : config.shape === 'diamond' ? 14 : 14;
+    const fontSize = config.shape === 'circle' ? 12 : config.shape === 'diamond' ? 10 : 10;
     
     return {
       position: 'absolute',
-      right,
+      right: config.shape === 'circle' ? -8 : config.shape === 'diamond' ? -7 : -7,
       top: '50%',
       transform: 'translateY(-50%)',
       width: size,
@@ -120,7 +133,8 @@ export class NodeStyleManager {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      zIndex: 2
+      zIndex: 2,
+      boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
     };
   }
 
@@ -139,7 +153,8 @@ export class NodeStyleManager {
       '#1565c0': '#f3f9fd',
       '#ef6c00': '#fff8e1',
       '#00897b': '#e0f2f1',
-      '#8e24aa': '#f3e5f5'
+      '#8e24aa': '#f3e5f5',
+      '#ff6b35': '#fff3e0'
     };
     return colorMap[color] || '#f5f5f5';
   }
@@ -150,7 +165,8 @@ export class NodeStyleManager {
       '#1565c0': '#b3c6e0',
       '#ef6c00': '#ffe0b2',
       '#00897b': '#b2dfdb',
-      '#8e24aa': '#e1bee7'
+      '#8e24aa': '#e1bee7',
+      '#ff6b35': '#ffcc80'
     };
     return colorMap[color] || '#e0e0e0';
   }

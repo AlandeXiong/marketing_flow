@@ -7,9 +7,10 @@ export class ConnectionManager {
       // Define which node types can connect to which
       allowedConnections: {
         start: ['activityDetail'],
-        activityDetail: ['segment'],
-        segment: ['strategy'],
-        strategy: ['emailTemplate'],
+        activityDetail: ['segment', 'condition'],
+        segment: ['strategy', 'condition'],
+        strategy: ['emailTemplate', 'condition'],
+        condition: ['emailTemplate', 'strategy'],
         emailTemplate: [] // End node
       }
     };

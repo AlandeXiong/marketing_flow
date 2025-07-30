@@ -72,6 +72,25 @@ export class NodeFactory {
         );
       }
 
+      if (config.shape === 'diamond') {
+        return (
+          <div style={containerStyle}>
+            {renderHandles()}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+              {renderIcon()}
+              <Title level={5} style={textStyle}>{config.label}</Title>
+              <button
+                style={buttonStyle}
+                title="Add Node"
+                onClick={e => { e.stopPropagation(); props?.data?.onAddNode && props.data.onAddNode(); }}
+              >
+                +
+              </button>
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div style={containerStyle}>
           {renderHandles()}
