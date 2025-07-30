@@ -160,10 +160,11 @@ function App() {
     let newNodes = [...nodes, newNode];
     let newEdges = edges;
     if (addParentId) {
-      newEdges = [...edges, connectionManager.createEdge(addParentId, newId)];
+      const parentNode = nodes.find(n => n.id === addParentId);
+      newEdges = [...edges, connectionManager.createEdge(addParentId, newId, parentNode?.type, newNodeType)];
     } else if (nodes.length > 0) {
       const lastNode = nodes[nodes.length - 1];
-      newEdges = [...edges, connectionManager.createEdge(lastNode.id, newId)];
+      newEdges = [...edges, connectionManager.createEdge(lastNode.id, newId, lastNode.type, newNodeType)];
     }
     layoutAndSetNodes(newNodes, newEdges);
     setEdges(newEdges);

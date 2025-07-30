@@ -16,7 +16,7 @@ export const NODE_TYPE_CONFIG = {
     hasTarget: false,
     hasSource: true,
     shape: 'circle',
-    size: { width: 50, height: 50 }
+    size: { width: 60, height: 60 }
   },
   [NODE_TYPES.CAMPAIGN]: {
     label: 'Campaign',
@@ -61,7 +61,15 @@ export const NODE_TYPE_CONFIG = {
     hasTarget: true,
     hasSource: true,
     shape: 'diamond',
-    size: { width: 50, height: 50 }
+    size: { width: 60, height: 60 }
+  }
+};
+
+// Connection symbols configuration
+export const CONNECTION_SYMBOLS = {
+  [NODE_TYPES.CONDITION]: {
+    icon: '/condition.png',
+    size: { width: 16, height: 16 }
   }
 };
 

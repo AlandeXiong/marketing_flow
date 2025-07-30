@@ -1,4 +1,4 @@
-import { NODE_TYPE_CONFIG } from '../types/nodeTypes';
+import { NODE_TYPE_CONFIG, CONNECTION_SYMBOLS } from '../types/nodeTypes';
 
 // Connection logic and positioning utilities
 export class ConnectionManager {
@@ -50,14 +50,24 @@ export class ConnectionManager {
   }
 
   // Create edge object
-  createEdge(sourceId, targetId) {
-    return {
+  createEdge(sourceId, targetId, sourceType = null, targetType = null) {
+    const edge = {
       id: this.generateEdgeId(sourceId, targetId),
       source: sourceId,
       target: targetId,
       animated: true,
       style: { strokeWidth: 3 }
     };
+
+    // Make condition connections consistent with other nodes
+    if (sourceType === 'condition' || targetType === 'condition') {
+      edge.style = {
+        ...edge.style,
+        stroke: '#666' // Use same gray color as other connections
+      };
+    }
+
+    return edge;
   }
 }
 

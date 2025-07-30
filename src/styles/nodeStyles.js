@@ -88,10 +88,11 @@ export class NodeStyleManager {
     }
     
     return {
-      width: config.shape === 'circle' ? 24 : config.shape === 'diamond' ? 20 : 17,
-      height: config.shape === 'circle' ? 24 : config.shape === 'diamond' ? 20 : 17,
+      width: config.shape === 'circle' ? 24 : config.shape === 'diamond' ? 16 : 17,
+      height: config.shape === 'circle' ? 24 : config.shape === 'diamond' ? 16 : 17,
       display: 'block',
       marginTop: config.shape === 'circle' ? 0 : 2,
+      marginBottom: config.shape === 'diamond' ? 4 : 0,
       transform: config.shape === 'diamond' ? 'rotate(-45deg)' : 'none'
     };
   }
@@ -103,7 +104,7 @@ export class NodeStyleManager {
       color: config.color,
       fontWeight: 700,
       margin: 0,
-      fontSize: config.shape === 'circle' ? 8 : config.shape === 'diamond' ? 7 : 7,
+      fontSize: config.shape === 'circle' ? 8 : config.shape === 'diamond' ? 6 : 7,
       lineHeight: '1.2',
       marginBottom: config.shape === 'circle' ? 0 : 1,
       transform: config.shape === 'diamond' ? 'rotate(-45deg)' : 'none'
