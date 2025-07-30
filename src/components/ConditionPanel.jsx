@@ -80,13 +80,13 @@ const ConditionPanel = ({ node, onSave }) => {
               onChange={setConditionType}
               style={{ width: '100%', marginTop: 8 }}
               size="large"
-              dropdownStyle={{ maxHeight: 300 }}
+              dropdownStyle={{ maxHeight: 350 }}
             >
               {conditionTypes.map(type => (
                 <Option key={type.value} value={type.value}>
-                  <div style={{ padding: '8px 0' }}>
-                    <div style={{ fontSize: '14px', fontWeight: 500 }}>{type.label}</div>
-                    <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>{type.description}</div>
+                  <div style={{ padding: '1px 0' }}>
+                    <div style={{ fontSize: '14px', fontWeight: 300 }}>{type.label}</div>
+                    {/* <div style={{ fontSize: '12px', color: '#666', marginTop: '1px' }}>{type.description}</div> */}
                   </div>
                 </Option>
               ))}
