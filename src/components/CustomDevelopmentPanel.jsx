@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Typography, Select, Input, Button, Space, Divider, Switch, Tabs, Form, Upload, message } from 'antd';
+import { Card, Typography, Select, Input, Button, Divider, Switch, Tabs, Form, Upload, message } from 'antd';
+import { CompatibleSpace } from './CompatibleComponents';
 import { PlusOutlined, CodeOutlined, ApiOutlined, SettingOutlined } from '@ant-design/icons';
 import { CUSTOM_COMPONENTS_CONFIG, CUSTOM_UTILS } from '../config/customComponents';
 
@@ -55,7 +56,7 @@ const CustomDevelopmentPanel = () => {
       <Tabs defaultActiveKey="components">
         <TabPane tab="Custom Components" key="components">
           <Card title="Component Management" style={{ marginBottom: 16 }}>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <CompatibleSpace direction="vertical" style={{ width: '100%' }}>
               <div>
                 <Text strong>Upload Custom Component</Text>
                 <Upload
@@ -87,7 +88,7 @@ const CustomDevelopmentPanel = () => {
                   ))}
                 </div>
               </div>
-            </Space>
+            </CompatibleSpace>
           </Card>
         </TabPane>
 
@@ -150,7 +151,7 @@ const CustomDevelopmentPanel = () => {
 
         <TabPane tab="Styling" key="styling">
           <Card title="Theme Configuration" style={{ marginBottom: 16 }}>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <CompatibleSpace direction="vertical" style={{ width: '100%' }}>
               <div>
                 <Text strong>Select Theme</Text>
                 <Select
@@ -183,13 +184,13 @@ const CustomDevelopmentPanel = () => {
                   )}
                 </div>
               </div>
-            </Space>
+            </CompatibleSpace>
           </Card>
         </TabPane>
 
         <TabPane tab="Settings" key="settings">
           <Card title="Development Settings" style={{ marginBottom: 16 }}>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <CompatibleSpace direction="vertical" style={{ width: '100%' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <Text strong>Enable Custom Development</Text>
@@ -229,7 +230,7 @@ const CustomDevelopmentPanel = () => {
                 </div>
                 <Switch />
               </div>
-            </Space>
+            </CompatibleSpace>
           </Card>
         </TabPane>
       </Tabs>

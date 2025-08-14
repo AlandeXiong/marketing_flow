@@ -1,104 +1,343 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Drawer, Input, Button, Card } from 'antd';
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, Input, Card, Typography, Divider, Spin } from 'antd';
+import chatService from '../services/chatService';
+import { CompatibleAlert, CompatibleSpace } from './CompatibleComponents';
 
-const MCP_WS_URL = 'ws://localhost:8080/chat';
-
-const WELCOME_MSG = {
-  role: 'assistant',
-  content: "Hello! I am your Smart Marketing Assistant. You can ask me about campaign details, audience segments, channels, or delivery strategies. Try typing: 'Show me campaign info' or 'Get segment details'."
-};
+const { TextArea } = Input;
+const { Title, Text } = Typography;
 
 const ChatWidget = () => {
-  const [open, setOpen] = useState(false);
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([WELCOME_MSG]);
-  const ws = useRef(null);
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [backendStatus, setBackendStatus] = useState('unknown');
+  const [campaignAdvice, setCampaignAdvice] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    if (open && !ws.current) {
-      ws.current = new window.WebSocket(MCP_WS_URL);
-      ws.current.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          setMessages((msgs) => [...msgs, { role: 'assistant', content: data }]);
-        } catch {
-          setMessages((msgs) => [...msgs, { role: 'assistant', content: event.data }]);
-        }
-      };
-      ws.current.onclose = () => { ws.current = null; };
-    }
-    return () => {
-      if (ws.current) { ws.current.close(); ws.current = null; }
-    };
-  }, [open]);
-
-  const handleSend = () => {
-    if (!input.trim()) return;
-    setMessages((msgs) => [...msgs, { role: 'user', content: input }]);
-    if (ws.current && ws.current.readyState === 1) {
-      ws.current.send(input);
-    }
-    setInput('');
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const renderMsg = (msg, idx) => {
-    if (msg.role === 'user') {
-      return <div key={idx} style={{ textAlign: 'right', margin: '8px 0' }}><Card size="small" style={{ display: 'inline-block', background: '#e6f7ff' }}>{msg.content}</Card></div>;
+  useEffect(() => {
+    scrollToBottom();
+    checkBackendStatus();
+  }, [messages]);
+
+  const checkBackendStatus = async () => {
+    try {
+      const isConnected = await chatService.testConnection();
+      setBackendStatus(isConnected ? 'connected' : 'disconnected');
+    } catch (error) {
+      setBackendStatus('error');
     }
-    // Structure response
-    if (typeof msg.content === 'object') {
-      return <div key={idx} style={{ textAlign: 'left', margin: '8px 0' }}><Card size="small" title="Assistant" style={{ display: 'inline-block', background: '#fafafa' }}><pre style={{ margin: 0, fontSize: 13 }}>{JSON.stringify(msg.content, null, 2)}</pre></Card></div>;
+  };
+
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim() || isLoading) return;
+
+    const userMessage = {
+      id: Date.now(),
+      text: inputMessage,
+      sender: 'user',
+      timestamp: new Date().toLocaleTimeString()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputMessage('');
+    setIsLoading(true);
+
+    try {
+      const response = await chatService.sendMessage(inputMessage);
+      
+      if (response.success) {
+        const aiMessage = {
+          id: Date.now() + 1,
+          text: response.aiResponse,
+          sender: 'ai',
+          timestamp: new Date().toLocaleTimeString()
+        };
+        setMessages(prev => [...prev, aiMessage]);
+      } else {
+        throw new Error(response.error || 'Failed to get AI response');
+      }
+    } catch (error) {
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: `Error: ${error.message}`,
+        sender: 'error',
+        timestamp: new Date().toLocaleTimeString()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
     }
-    return <div key={idx} style={{ textAlign: 'left', margin: '8px 0' }}><Card size="small" style={{ display: 'inline-block', background: '#fafafa' }}>{msg.content}</Card></div>;
+  };
+
+  const handleGetCampaignAdvice = async () => {
+    setIsLoading(true);
+    try {
+      const response = await chatService.getCampaignAdvice(
+        'Digital Marketing',
+        'Young professionals aged 25-35',
+        50000
+      );
+      
+      if (response.success) {
+        setCampaignAdvice(response.advice);
+      } else {
+        throw new Error(response.error || 'Failed to get campaign advice');
+      }
+    } catch (error) {
+      console.error('Error getting campaign advice:', error);
+      setCampaignAdvice(`Error: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getStatusType = () => {
+    switch (backendStatus) {
+      case 'connected': return 'success';
+      case 'disconnected': return 'error';
+      case 'error': return 'warning';
+      default: return 'info';
+    }
+  };
+
+  const getStatusText = () => {
+    switch (backendStatus) {
+      case 'connected': return 'Backend Connected';
+      case 'disconnected': return 'Backend Disconnected';
+      case 'error': return 'Connection Error';
+      default: return 'Checking Status...';
+    }
+  };
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
   };
 
   return (
     <>
-        <Button 
-        type="primary" 
-        shape="circle" 
-        size="large" 
-        style={{ 
-          position: 'fixed', 
-          right: 64, 
-          bottom: 48, 
-          zIndex: 1001, 
-          display: 'flex', 
-          alignItems: 'center', 
+      {/* 抽屉触发器 - 固定在右下角 */}
+      <div
+        onClick={toggleDrawer}
+        style={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          width: 60,
+          height: 60,
+          borderRadius: '50%',
+          backgroundColor: '#1890ff',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'white', // White
-          border: '1px solid #e8e8e8', // box
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' // shade
-        }} 
-        onClick={() => setOpen(true)}
+          cursor: 'pointer',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          zIndex: 1001,
+          transition: 'all 0.3s ease',
+          fontSize: '24px',
+          fontWeight: 'bold'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.transform = 'scale(1.1)';
+          e.target.style.backgroundColor = '#40a9ff';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.transform = 'scale(1)';
+          e.target.style.backgroundColor = '#1890ff';
+        }}
       >
-        <img src="/robot.png" alt="campaign" style={{ width: 32, height: 32, display: 'block' }} />
-      </Button>
-      <Drawer
-        title="Smart Marketing Assistant"
-        placement="right"
-        width={400}
-        onClose={() => setOpen(false)}
-        open={open}
-        bodyStyle={{ display: 'flex', flexDirection: 'column', height: '100%', padding: 0 }}
+        {isDrawerOpen ? '×' : '💬'}
+      </div>
+
+      {/* 抽屉内容 */}
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          right: isDrawerOpen ? 0 : '-400px',
+          width: 400,
+          height: '100vh',
+          backgroundColor: 'white',
+          boxShadow: isDrawerOpen ? '-4px 0 12px rgba(0,0,0,0.15)' : 'none',
+          zIndex: 1000,
+          transition: 'right 0.3s ease',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
       >
-        <div style={{ flex: 1, overflowY: 'auto', padding: 16, background: '#f5f5f5' }}>
-          {messages.map(renderMsg)}
+        {/* 抽屉头部 */}
+        <div
+          style={{
+            padding: '16px 20px',
+            borderBottom: '1px solid #f0f0f0',
+            backgroundColor: '#fafafa',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <Title level={4} style={{ margin: 0 }}>AI Campaign Assistant</Title>
+          <CompatibleAlert
+            message={getStatusText()}
+            type={getStatusType()}
+            showIcon
+            size="small"
+            style={{ fontSize: '10px' }}
+          />
         </div>
-        <div style={{ padding: 16, borderTop: '1px solid #eee', background: '#fff' }}>
-          <Input.Group compact>
-            <Input
-              style={{ width: 'calc(100% - 70px)' }}
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onPressEnter={handleSend}
-              placeholder="Type a command... (e.g. 'Show me campaign info')"
-              autoFocus
-            />
-            <Button type="primary" onClick={handleSend}>Send</Button>
-          </Input.Group>
+
+        {/* 抽屉内容区域 */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          {/* Campaign Advice Section */}
+          <div style={{ padding: '16px 20px', borderBottom: '1px solid #f0f0f0' }}>
+            <Button 
+              type="primary" 
+              onClick={handleGetCampaignAdvice}
+              loading={isLoading}
+              block
+            >
+              Get Campaign Advice
+            </Button>
+            
+            {campaignAdvice && (
+              <div style={{ marginTop: 12 }}>
+                <Divider style={{ margin: '8px 0' }} />
+                <Text strong>Campaign Advice:</Text>
+                <div style={{ 
+                  marginTop: 8, 
+                  padding: 8, 
+                  backgroundColor: '#f5f5f5', 
+                  borderRadius: 4,
+                  maxHeight: 150,
+                  overflowY: 'auto'
+                }}>
+                  <Text style={{ whiteSpace: 'pre-wrap' }}>{campaignAdvice}</Text>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Chat Messages */}
+          <div style={{ 
+            flex: 1,
+            padding: '16px 20px',
+            overflowY: 'auto'
+          }}>
+            {messages.length === 0 && !isLoading && (
+              <div style={{ 
+                textAlign: 'center', 
+                color: '#999', 
+                marginTop: '40px',
+                fontSize: '14px'
+              }}>
+                👋 Welcome! Start a conversation about marketing campaigns.
+              </div>
+            )}
+            
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                style={{
+                  marginBottom: 12,
+                  textAlign: message.sender === 'user' ? 'right' : 'left'
+                }}
+              >
+                <div
+                  style={{
+                    display: 'inline-block',
+                    padding: '10px 14px',
+                    borderRadius: 18,
+                    backgroundColor: message.sender === 'user' 
+                      ? '#1890ff' 
+                      : message.sender === 'error'
+                      ? '#ff4d4f'
+                      : '#f0f0f0',
+                    color: message.sender === 'user' ? 'white' : 'black',
+                    maxWidth: '80%',
+                    wordWrap: 'break-word'
+                  }}
+                >
+                  <Text style={{ 
+                    color: message.sender === 'user' ? 'white' : 'inherit',
+                    fontSize: '13px'
+                  }}>
+                    {message.text}
+                  </Text>
+                  <div style={{ 
+                    fontSize: '11px', 
+                    opacity: 0.7, 
+                    marginTop: 6 
+                  }}>
+                    {message.timestamp}
+                  </div>
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div style={{ textAlign: 'left', marginBottom: 12 }}>
+                <div style={{
+                  display: 'inline-block',
+                  padding: '10px 14px',
+                  borderRadius: 18,
+                  backgroundColor: '#f0f0f0'
+                }}>
+                  <Spin size="small" /> AI is thinking...
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Section */}
+          <div style={{ 
+            padding: '16px 20px', 
+            borderTop: '1px solid #f0f0f0',
+            backgroundColor: '#fafafa'
+          }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+              <TextArea
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                placeholder="Ask about marketing campaigns..."
+                autoSize={{ minRows: 1, maxRows: 3 }}
+                onPressEnter={(e) => {
+                  if (!e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }
+                }}
+                style={{ flex: 1 }}
+              />
+              <Button
+                type="primary"
+                onClick={handleSendMessage}
+                loading={isLoading}
+                disabled={!inputMessage.trim()}
+              >
+                Send
+              </Button>
+            </div>
+
+            {/* Connection Status */}
+            <div style={{ textAlign: 'center' }}>
+              <CompatibleSpace>
+                <Button 
+                  size="small" 
+                  onClick={checkBackendStatus}
+                  loading={backendStatus === 'unknown'}
+                >
+                  Refresh Status
+                </Button>
+              </CompatibleSpace>
+            </div>
+          </div>
         </div>
-      </Drawer>
+      </div>
     </>
   );
 };

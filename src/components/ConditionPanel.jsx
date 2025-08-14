@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Card, Typography, Select, Input, Button, Space, Divider, Tag } from 'antd';
+import { Card, Typography, Select, Input, Button, Divider } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { CompatibleSpace, CompatibleTag } from './CompatibleComponents';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -62,7 +63,7 @@ const ConditionPanel = ({ node, onSave }) => {
       <Title level={4}>Condition Configuration</Title>
       
       <Card style={{ marginBottom: 16 }}>
-        <Space direction="vertical" style={{ width: '100%' }}>
+        <CompatibleSpace direction="vertical" style={{ width: '100%' }}>
           <div>
             <Text strong>Condition Name</Text>
             <Input
@@ -92,7 +93,7 @@ const ConditionPanel = ({ node, onSave }) => {
               ))}
             </Select>
           </div>
-        </Space>
+        </CompatibleSpace>
       </Card>
 
       <Card title="Flow Paths" extra={
@@ -100,10 +101,10 @@ const ConditionPanel = ({ node, onSave }) => {
           Add Path
         </Button>
       }>
-        <Space direction="vertical" style={{ width: '100%' }}>
+        <CompatibleSpace direction="vertical" style={{ width: '100%' }}>
           {flowPaths.map((path, index) => (
             <Card key={path.id} size="small" style={{ border: '1px solid #d9d9d9' }}>
-              <Space direction="vertical" style={{ width: '100%' }}>
+              <CompatibleSpace direction="vertical" style={{ width: '100%' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Text strong>Path {index + 1}</Text>
                   <Button
@@ -149,10 +150,10 @@ const ConditionPanel = ({ node, onSave }) => {
                     ))}
                   </Select>
                 </div>
-              </Space>
+              </CompatibleSpace>
             </Card>
           ))}
-        </Space>
+        </CompatibleSpace>
       </Card>
 
       <Divider />
@@ -177,9 +178,9 @@ const ConditionPanel = ({ node, onSave }) => {
           <Text strong>Paths:</Text>
           <div style={{ marginTop: 4 }}>
             {flowPaths.map((path, index) => (
-              <Tag key={path.id} color="blue" style={{ marginBottom: 4 }}>
+              <CompatibleTag key={path.id} color="blue" style={{ marginBottom: 4 }}>
                 {path.name} → {targetNodeTypes.find(t => t.value === path.targetType)?.label}
-              </Tag>
+              </CompatibleTag>
             ))}
           </div>
         </div>
