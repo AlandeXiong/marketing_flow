@@ -162,6 +162,136 @@ class ChatService {
             throw error;
         }
     }
+    
+    // Campaign creation methods
+    async createCampaign(userId, confirmedParams, aiRecommendations) {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/chat/create-campaign`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId, confirmedParams, aiRecommendations })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error creating campaign:', error);
+            throw error;
+        }
+    }
+    
+    async activateCampaign(campaignId) {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/chat/activate-campaign/${campaignId}`, {
+                method: 'POST'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error activating campaign:', error);
+            throw error;
+        }
+    }
+    
+    async getCampaignStatus(campaignId) {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/chat/campaign-status/${campaignId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error getting campaign status:', error);
+            throw error;
+        }
+    }
+    
+    // MCP Client methods
+    async connectMcpClient() {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/chat/mcp-client/connect`, {
+                method: 'POST'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error connecting MCP client:', error);
+            throw error;
+        }
+    }
+    
+    async getMcpClientStatus() {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/chat/mcp-client/status`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error getting MCP client status:', error);
+            throw error;
+        }
+    }
+    
+    async getMarketingServiceInfo() {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/chat/mcp-client/marketing-info`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error getting marketing service info:', error);
+            throw error;
+        }
+    }
+    
+    async callMarketingServiceTool(toolName, toolArguments) {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/chat/mcp-client/call-tool`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ toolName, arguments: toolArguments })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error calling marketing service tool:', error);
+            throw error;
+        }
+    }
 }
 
 export default new ChatService();
