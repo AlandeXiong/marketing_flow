@@ -125,7 +125,7 @@ const ChatWidget = () => {
         onClick={toggleDrawer}
         style={{
           position: 'fixed',
-          bottom: 20,
+          bottom: 220,
           right: 20,
           width: 60,
           height: 60,
